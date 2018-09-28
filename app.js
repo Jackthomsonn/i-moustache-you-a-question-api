@@ -138,7 +138,7 @@ class Application {
               }
             }
             game.playersAnswered.push(player);
-            if (game.players === game.playersAnswered) {
+            if (game.players.length === game.playersAnswered.length) {
               io.emit('endOfRound');
             }
           } else {
