@@ -23,6 +23,8 @@ class Application {
 
       socket.on('joinGame', (data) => {
         socket.join(data.gameName);
+        Console.log('Game joined');
+        socket.emit('addPlayer', data.gameName, data.playerName);
       });
 
       socket.on('leaveGame', (data) => {
