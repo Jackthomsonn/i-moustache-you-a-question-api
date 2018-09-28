@@ -31,6 +31,8 @@ class Application {
               playerId: id,
               score: 0
             });
+            console.log('GAMES')
+            console.log(games)
             if (games[i].players.length === 3) {
               socket.to(games[i].gameName).emit('startGame');
             }
