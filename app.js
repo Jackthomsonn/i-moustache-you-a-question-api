@@ -32,7 +32,7 @@ class Application {
               score: 0
             });
             console.log('GAMES')
-            console.log(games)
+            console.log(games[i].players.length)
             if (games[i].players.length === 3) {
               socket.to(games[i].gameName).emit('startGame');
             }
