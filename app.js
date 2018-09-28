@@ -25,7 +25,19 @@ class Application {
         socket.join(data.gameName);
         console.log('Game joined');
         console.log(games);
-        socket.emit('addPlayer', data.gameName, data.playerName);
+        
+        for (let i = 0; i < games.length; i ++) {
+          if (games[i].gameName === data.gameName) {
+            games[i].players.push({
+              playerName: data.playerName, 
+              playerId: socket.id,
+              score: 0
+            });
+            if (games[i].players.length === 3) {
+              socket.to(games[i].gameName).emit('startGame');
+            }
+          }
+        }
       });
 
       socket.on('disconnect', (data) => {
@@ -69,24 +81,6 @@ class Application {
         for (let i = 0; i < games.length; i ++) {
           if (games[i].gameName === data.gameName) {
             games.splice(i, 1);
-          }
-        }
-      });
-
-      socket.on('addPlayer', (data) => {
-        console.log('Add player');
-        console.log(data);
-        console.log(socket);
-        for (let i = 0; i < games.length; i ++) {
-          if (games[i].gameName === data.gameName) {
-            games[i].players.push({
-              playerName: data.playerName, 
-              playerId: socket.id,
-              score: 0
-            });
-            if (games[i].players.length === 3) {
-              socket.to(games[i].gameName).emit('startGame');
-            }
           }
         }
       });
