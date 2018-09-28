@@ -36,7 +36,7 @@ class Application {
             });
 
             if (games[i].players.length === 3) {
-              io.emit('startGame', games[i]);
+              io.in(games[i].gameName).emit('startGame', games[i]);
             }
           }
         }
@@ -144,7 +144,23 @@ class Application {
 
       });
 
-      socket.on('')
+      socket.on('endGame', (data) => {
+        var game = null;
+        var winner = null;
+        var question = null;
+
+        for (let i = 0; i < games.length; i ++) {
+          if (games[i].gameName === data.gameName) {
+            game = games[i];
+          }
+        }
+
+        if (game != null) {
+          for (let j = 0; j < game.players.length; j ++) {
+            if (winner == null || game.players[i].score)
+          }
+        }
+      });
     });
   }
 }
