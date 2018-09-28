@@ -138,8 +138,9 @@ class Application {
               }
             }
             game.playersAnswered.push(player);
+            console.log(game);
             if (game.players.length === game.playersAnswered.length) {
-              io.emit('endOfRound');
+              io.in(game.gameName).emit('endOfRound', {done: true});
             }
           } else {
             console.log('Player not found');
