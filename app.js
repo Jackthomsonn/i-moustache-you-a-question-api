@@ -140,9 +140,11 @@ class Application {
             }
             game.playersAnswered.push(player);
             console.log(game);
+            console.log(game.players);
+            console.log(game.playersAnswered);
             if (game.players.length === game.playersAnswered.length) {
               console.log('End of Round');
-              io.emit(game.gameName).emit('endOfRound', {done: true});
+              io.emit('endOfRound', {done: true});
             }
           } else {
             console.log('Player not found');
