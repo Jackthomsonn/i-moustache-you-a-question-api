@@ -150,6 +150,7 @@ class Application {
             if (game.players.length === game.playersAnswered.length) {
               console.log('End of Round');
               io.emit('endOfRound', {done: true});
+              game.playersAnswered = [];
             }
           } else {
             console.log('Player not found');
