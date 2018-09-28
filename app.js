@@ -3,7 +3,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var request = require('request');
 
-const azureFunctionUrl = 'https://test-app-1900872.azurewebsites.net/api/HandlebarTrigger?code=g792XOQV4rMsdW1/iCFB2/zwFRcV55qBNV8ert7j7wnmfDIBZT4xLw==='
+const azureFunctionUrl = 'https://test-app-1900872.azurewebsites.net/api/HandlebarTrigger?code=g792XOQV4rMsdW1/iCFB2/zwFRcV55qBNV8ert7j7wnmfDIBZT4xLw=='
 const games = [];
 
 
