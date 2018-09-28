@@ -24,7 +24,7 @@ class Application {
       socket.on('joinGame', (data) => {
         socket.join(data.gameName);
 
-        console.log('Socket is joinign game room')
+        console.log('Socket is joining game room')
           console.log(data.gameName)
         
         for (let i = 0; i < games.length; i ++) {
@@ -36,7 +36,7 @@ class Application {
             });
 
             if (games[i].players.length === 3) {
-              io.emit('startGame');
+              io.emit('startGame', games[i]);
             }
           }
         }
@@ -144,6 +144,7 @@ class Application {
 
       });
 
+      socket.on('')
     });
   }
 }
