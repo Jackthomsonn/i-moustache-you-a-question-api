@@ -23,7 +23,7 @@ class Application {
 
       socket.on('joinGame', (data) => {
         socket.join(data.gameName);
-        Console.log('Game joined');
+        console.log('Game joined');
         socket.emit('addPlayer', data.gameName, data.playerName);
       });
 
@@ -60,6 +60,9 @@ class Application {
               playerName: data.playerName, 
               score: 0
             });
+            if (games[i].players.length = 3) {
+              socket.to(games[i].gameName).emit('startGame');
+            }
           }
         }
       });
@@ -101,10 +104,10 @@ class Application {
               }
             }
           } else {
-            Console.log('Player not found');
+            console.log('Player not found');
           }
         } else {
-          Console.log('Game not found');
+          console.log('Game not found');
         }
 
       });
