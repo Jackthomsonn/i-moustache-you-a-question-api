@@ -74,6 +74,9 @@ class Application {
       });
 
       socket.on('addPlayer', (data) => {
+        console.log('Add player');
+        console.log(data);
+        console.log(socket);
         for (let i = 0; i < games.length; i ++) {
           if (games[i].gameName === data.gameName) {
             games[i].players.push({
