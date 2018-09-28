@@ -19,18 +19,16 @@ class Application {
     })
     
     io.on('connection', function (socket) {
-      console.log('Socket connected ' + socket.id)
+      const id = socket.id;
 
       socket.on('joinGame', (data) => {
         socket.join(data.gameName);
-        console.log('Game joined');
-        console.log(games);
         
         for (let i = 0; i < games.length; i ++) {
           if (games[i].gameName === data.gameName) {
             games[i].players.push({
               playerName: data.playerName, 
-              playerId: socket.id,
+              playerId: id,
               score: 0
             });
             if (games[i].players.length === 3) {
@@ -41,10 +39,6 @@ class Application {
       });
 
       socket.on('disconnect', (data) => {
-
-        console.log('Disconnect');
-        console.log(data);
-
         var game = null;
         var player = null;
 
@@ -72,6 +66,17 @@ class Application {
             players: [],
             questions: body
           });
+
+          for (let i = 0; i < games.length; i ++) {
+            if (games[i].gameName === data.gameName) {
+              games[i].players.push({
+                playerName: data.playerName, 
+                playerId: id,
+                score: 0
+              });
+            }
+          }
+
           socket.join(data.gameName);
           io.emit('updateGames', games);
         });
