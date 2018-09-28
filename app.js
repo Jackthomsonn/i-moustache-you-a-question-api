@@ -111,6 +111,8 @@ class Application {
       });
 
       socket.on('submitAnswer', (data) => {
+        console.log('DATA')
+        console.log(data)
         var game = null;
         var player = null;
         var question = null;
@@ -120,6 +122,9 @@ class Application {
             game = games[i];
           }
         }
+
+        console.log('GAME')
+        console.log(game)
 
         if (game != null) {
           for (let j = 0; j < game.players.length; j ++) {
