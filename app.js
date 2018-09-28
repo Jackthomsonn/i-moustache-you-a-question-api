@@ -23,6 +23,9 @@ class Application {
 
       socket.on('joinGame', (data) => {
         socket.join(data.gameName);
+
+        console.log('Socket is joinign game room')
+          console.log(data.gameName)
         
         for (let i = 0; i < games.length; i ++) {
           if (games[i].gameName === data.gameName) {
@@ -31,8 +34,7 @@ class Application {
               playerId: id,
               score: 0
             });
-            console.log('GAMES')
-            console.log(games[i].players.length)
+
             if (games[i].players.length === 3) {
               socket.to(games[i].gameName).emit('startGame');
             }
@@ -62,7 +64,9 @@ class Application {
       socket.emit('liveGames', games);
 
       socket.on('addGame', (data) => {       
-        request(azureFunctionUrl, function (error, response, body) {       
+        request(azureFunctionUrl, function (error, response, body) {
+          console.log('QUESTIONS')
+          console.log(body)
           games.push({
             gameName: data.gameName,
             players: [],
@@ -78,6 +82,9 @@ class Application {
               });
             }
           }
+
+          console.log('Socket is joinign game room (Host)')
+          console.log(data.gameName)
 
           socket.join(data.gameName);
           io.emit('updateGames', games);
