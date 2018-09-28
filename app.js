@@ -72,6 +72,7 @@ class Application {
           games.push({
             gameName: data.gameName,
             players: [],
+            playersAnswered: [],
             questions: body
           });
 
