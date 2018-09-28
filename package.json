@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "scripts": {
-    "start": "node app"
-  },
+  "start": "node app",
   "dependencies": {
     "@types/node": "^10.11.2",
     "cors": "^2.8.4",
