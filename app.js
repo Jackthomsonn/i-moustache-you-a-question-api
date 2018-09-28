@@ -29,6 +29,8 @@ class Application {
         socket.on(disconnect);
       });
 
+      socket.emit('liveGames', games);
+
       socket.on('addGame', (data) => {       
         request(azureFunctionUrl, function (error, response, body) {       
           games.push({
