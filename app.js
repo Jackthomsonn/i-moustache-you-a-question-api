@@ -58,6 +58,8 @@ class Application {
               game.players.splice(i, 1);
             }
           }
+        } else {
+          console.log('Game not found');
         }
       });
 
@@ -135,6 +137,10 @@ class Application {
                 }
               }
             }
+            game.playersAnswered.push(player);
+            if (game.players === game.playersAnswered) {
+              io.emit('endOfRound');
+            }
           } else {
             console.log('Player not found');
           }
@@ -144,25 +150,27 @@ class Application {
 
       });
 
-      // socket.on('endGame', (data) => {
-      //   var game = null;
-      //   var winner = null;
-      //   var question = null;
+      socket.on('endGame', (data) => {
+        var game = null;
+        var winner = null;
 
-      //   for (let i = 0; i < games.length; i ++) {
-      //     if (games[i].gameName === data.gameName) {
-      //       game = games[i];
-      //     }
-      //   }
+        for (let i = 0; i < games.length; i ++) {
+          if (games[i].gameName === data.gameName) {
+            game = games[i];
+          }
+        }
 
-      //   if (game != null) {
-      //     for (let j = 0; j < game.players.length; j ++) {
-      //       if (winner == null || game.players[i].score) {
-              
-      //       }
-      //     }
-      //   }
-      // });
+        if (game != null) {
+          for (let j = 0; j < game.players.length; j ++) {
+            if (winner == null || game.players[i].score > winner.score) {
+              winner = game.players[i];
+            }
+          }
+          io.emit('endGame', winner);
+        } else {
+          console.log('Game not found');
+        }
+      });
     });
   }
 }
