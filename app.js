@@ -60,7 +60,7 @@ class Application {
               playerName: data.playerName, 
               score: 0
             });
-            if (games[i].players.length = 3) {
+            if (games[i].players.length == 3) {
               socket.to(games[i].gameName).emit('startGame');
             }
           }
