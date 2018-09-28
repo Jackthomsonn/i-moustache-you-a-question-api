@@ -36,7 +36,7 @@ class Application {
             });
 
             if (games[i].players.length === 3) {
-              socket.to(games[i].gameName).emit('startGame');
+              io.emit('startGame');
             }
           }
         }
