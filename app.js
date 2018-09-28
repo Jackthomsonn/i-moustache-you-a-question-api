@@ -22,7 +22,7 @@ class Application {
       console.log('Socket connected ' + socket.id)
 
       socket.on('joinGame', (data) => {
-        socket.join(data.roomName);
+        socket.join(data.gameName);
       });
 
       socket.on('leaveGame', (data) => {
